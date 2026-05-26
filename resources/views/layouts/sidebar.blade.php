@@ -16,9 +16,9 @@
         ];
     } else {
         $items = [
-            ['label' => 'Beranda', 'route' => route('pegawai.perdin.index')],
-            ['label' => 'Pengajuan Perdin', 'route' => route('pegawai.perdin.index')],
-            ['label' => 'Riwayat Pengajuan', 'route' => route('pegawai.perdin.index')],
+            ['label' => 'Beranda', 'route' => route('pegawai.perdin.index'), 'active' => request()->routeIs('pegawai.perdin.index') && request()->query('tab') !== 'history'],
+            ['label' => 'Pengajuan Perdin', 'route' => route('pegawai.perdin.create'), 'active' => request()->routeIs('pegawai.perdin.create')],
+            ['label' => 'Riwayat Pengajuan', 'route' => route('pegawai.perdin.index', ['tab' => 'history']), 'active' => request()->routeIs('pegawai.perdin.index') && request()->query('tab') === 'history'],
         ];
     }
 @endphp
@@ -39,7 +39,7 @@
 
     <nav class="mt-10 space-y-2">
         @foreach ($items as $item)
-            @php $active = request()->fullUrlIs($item['route'].'*') || request()->url() === $item['route']; @endphp
+            @php $active = $item['active'] ?? (request()->fullUrlIs($item['route'].'*') || request()->url() === $item['route']); @endphp
             <a href="{{ $item['route'] }}" class="{{ $active ? 'bg-sky-50 text-primary ring-1 ring-sky-100' : 'text-slate-700 hover:bg-slate-50' }} flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition">
                 <span class="h-2 w-2 rounded-full {{ $active ? 'bg-primary' : 'bg-slate-300' }}"></span>
                 {{ $item['label'] }}

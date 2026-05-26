@@ -22,16 +22,23 @@ class EmployeeBusinessTripController extends Controller
 
     public function index(Request $request): View
     {
+        $isHistory = $request->query('tab') === 'history';
+        $tripsQuery = $request->user()->businessTrips()
+            ->with(['originCity', 'destinationCity'])
+            ->latest();
+
+        if ($isHistory) {
+            $tripsQuery->whereIn('status', ['approved', 'rejected']);
+        }
+
         return view('employee.perdin.index', [
-            'trips' => $request->user()->businessTrips()
-                ->with(['originCity', 'destinationCity'])
-                ->latest()
-                ->paginate(10),
+            'trips' => $tripsQuery->paginate(10)->withQueryString(),
             'stats' => [
                 'total' => $request->user()->businessTrips()->count(),
                 'total_amount' => $request->user()->businessTrips()->sum('total_allowance_amount'),
                 'pending' => $request->user()->businessTrips()->where('status', 'pending')->count(),
             ],
+            'isHistory' => $isHistory,
         ]);
     }
 

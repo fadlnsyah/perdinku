@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    [x-cloak] {
+        display: none !important;
+    }
+
+    :root {
+        --color-primary: #006492;
+        --color-primary-soft: #2d9cdb;
+        --color-bg: #f8fafc;
+        --color-surface: #ffffff;
+        --color-border: #d9e2ec;
+        --color-text: #1b1c1c;
+    }
+
+    body {
+        @apply bg-slate-50 font-sans text-slate-900 antialiased;
+        background:
+            radial-gradient(circle at top left, rgba(45, 156, 219, 0.08), transparent 24%),
+            linear-gradient(180deg, #fbf9f8 0%, #f8fafc 100%);
+    }
+}
+
+@layer components {
+    .app-shell {
+        @apply min-h-screen bg-transparent;
+    }
+
+    .surface-card {
+        @apply rounded-3xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(15,23,42,0.08)];
+    }
+
+    .form-control {
+        @apply block w-full rounded-2xl border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-sky-500 focus:ring-sky-500/20;
+    }
+
+    .table-wrap {
+        @apply overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-[0_1px_3px_rgba(15,23,42,0.08)];
+    }
+}

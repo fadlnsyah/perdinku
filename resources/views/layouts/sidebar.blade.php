@@ -10,9 +10,7 @@
         ];
     } elseif ($user->hasRole('SDM')) {
         $items = [
-            ['label' => 'Beranda', 'route' => route('sdm.pengajuan.index')],
-            ['label' => 'Pengajuan Perdin', 'route' => route('sdm.pengajuan.index')],
-            ['label' => 'Riwayat Persetujuan', 'route' => route('sdm.pengajuan.index', ['tab' => 'history'])],
+            ['label' => 'Pengajuan Perdin', 'route' => route('sdm.pengajuan.index'), 'active' => request()->routeIs('sdm.pengajuan.index') || request()->routeIs('sdm.pengajuan.show')],
         ];
     } else {
         $items = [

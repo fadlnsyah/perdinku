@@ -16,9 +16,7 @@
         ];
     } else {
         $items = [
-            ['label' => 'Beranda', 'route' => route('pegawai.perdin.index'), 'active' => request()->routeIs('pegawai.perdin.index') && request()->query('tab') !== 'history'],
-            ['label' => 'Pengajuan Perdin', 'route' => route('pegawai.perdin.create'), 'active' => request()->routeIs('pegawai.perdin.create')],
-            ['label' => 'Riwayat Pengajuan', 'route' => route('pegawai.perdin.index', ['tab' => 'history']), 'active' => request()->routeIs('pegawai.perdin.index') && request()->query('tab') === 'history'],
+            ['label' => 'Pengajuan Perdin', 'route' => route('pegawai.perdin.index'), 'active' => request()->routeIs('pegawai.perdin.index') || request()->routeIs('pegawai.perdin.create') || request()->routeIs('pegawai.perdin.show')],
         ];
     }
 @endphp

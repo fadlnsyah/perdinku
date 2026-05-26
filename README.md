@@ -85,6 +85,20 @@ Setelah `cp .env.example .env`, sesuaikan konfigurasi database MySQL:
 - `DB_USERNAME=...`
 - `DB_PASSWORD=...`
 
+## Menjalankan Test
+
+Gunakan database testing terpisah agar test tidak menyentuh database utama:
+
+```bash
+cp .env.testing.example .env.testing
+```
+
+Lalu buat database MySQL baru, misalnya `perdinku_test`, dan sesuaikan kredensial di `.env.testing` bila perlu. Setelah itu jalankan:
+
+```bash
+php artisan test
+```
+
 ## Route Utama
 
 - `GET /login`
